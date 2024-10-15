@@ -8,10 +8,14 @@ public class Flock : MonoBehaviour
     float speed;
     
     // Boolean flag to check if the fish needs to turn (when hitting boundaries)
-    bool turning = false; 
+    bool turning = false;
 
     // Start is called before the first frame update
     // Initializes the fish with a random speed within the bounds set by FlockManager
+    private void Awake()
+    {
+        
+    }
     void Start()
     {
         // Set initial speed randomly between minimum and maximum speed set in the FlockManager
