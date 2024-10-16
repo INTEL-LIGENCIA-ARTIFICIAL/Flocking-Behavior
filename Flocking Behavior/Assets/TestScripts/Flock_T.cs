@@ -50,12 +50,12 @@ public class Flock_T : MonoBehaviour
                 }
 
                 // 如果找到最近的领导者，朝其方向旋转
-                if (closestLeader != null && closestDistance < FlockManager_T.FM.neighbourDistance)
+                if (closestLeader != null && closestDistance > FlockManager_T.FM.neighbourDistance)
                 {
                     Vector3 direction = closestLeader.transform.position - transform.position;
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), FlockManager_T.FM.rotationSpeed * Time.deltaTime);
                     // 如果需要，增加向领导者的速度
-                    speed += 0.1f;
+                    //speed += 0.1f;
                 }
             }
 
@@ -64,7 +64,7 @@ public class Flock_T : MonoBehaviour
             {
                 speed = Random.Range(FlockManager_T.FM.minSpeed, FlockManager_T.FM.maxSpeed);
             }
-
+           
             // 应用鱼群行为
             if (Random.Range(0, 100) < 10)
             {
@@ -98,6 +98,7 @@ public class Flock_T : MonoBehaviour
 
                     if (nDistance < 1.0f)
                     {
+                        // 增加分离力
                         vavoid += this.transform.position - go.transform.position;
                     }
 
@@ -107,28 +108,26 @@ public class Flock_T : MonoBehaviour
             }
         }
 
-        // 处理领导者的影响
-        if (FlockManager_T.FM.allLeader != null && FlockManager_T.FM.allLeader.Length > 0)
-        {
-            foreach (GameObject leader in FlockManager_T.FM.allLeader)
-            {
-                Vector3 leaderDirection = leader.transform.position - this.transform.position;
-                vcentre += leaderDirection;
-            }
-            speed += 0.1f;
-        }
-
         if (groupSize > 0)
         {
+            // 计算中心点和分离力
             vcentre = vcentre / groupSize + (FlockManager_T.FM.goalPos - this.transform.position);
             speed = gSpeed / groupSize;
 
+            // 控制速度范围
             if (speed > FlockManager_T.FM.maxSpeed)
             {
                 speed = FlockManager_T.FM.maxSpeed;
             }
 
+            // 计算方向并调整旋转
             Vector3 direction = (vcentre + vavoid) - this.transform.position;
+
+            // 增加分离力度
+            if (vavoid.magnitude > 0)
+            {
+                direction += vavoid.normalized * 2; // 调整分离力度
+            }
 
             if (direction != Vector3.zero)
             {
