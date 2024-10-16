@@ -11,14 +11,18 @@ public class FlockManager : MonoBehaviour
     public static FlockManager FM; 
     
     // The fish prefab to instantiate for each fish in the flock
-    public GameObject fishPrefab; 
-    
+    public GameObject fishPrefab;
+    public GameObject leaderPrefab;//new: Leader Prefab
+
     // Number of fish in the flock
-    public int numFish = 20; 
-    
+    public int numFish = 20;
+    public int numLeader = 2;//new Leader Num
+
+
     // Array to store all instantiated fish
-    public GameObject[] allFish; 
-    
+    public GameObject[] allFish;
+    public GameObject[] allLeader;//new leader array
+
     // Defines the 3D space within which the fish can swim
     public Vector3 swimLimits = new Vector3(5, 5, 5); 
     
@@ -49,6 +53,8 @@ public class FlockManager : MonoBehaviour
     {
         // Initialize the array to hold all the fish
         allFish = new GameObject[numFish];
+        allLeader = new GameObject[numLeader];//new leader
+
 
         // Loop to create and place each fish randomly within the swim limits
         for (int i = 0; i < numFish; i++)
@@ -61,6 +67,19 @@ public class FlockManager : MonoBehaviour
             
             // Instantiate the fish prefab at the random position with no rotation
             allFish[i] = Instantiate(fishPrefab, pos, Quaternion.identity);
+        }
+
+        //new generate leader
+        for (int i = 0; i < numLeader; i++)
+        {
+            // Calculate a random position within the swim limits
+            Vector3 pos = this.transform.position + new Vector3(
+                Random.Range(-swimLimits.x, swimLimits.x),
+                Random.Range(-swimLimits.y, swimLimits.y),
+                Random.Range(-swimLimits.z, swimLimits.z));
+
+            // Instantiate the fish prefab at the random position with no rotation
+            allLeader[i] = Instantiate(leaderPrefab, pos, Quaternion.identity);
         }
 
         // Set the static reference to this instance of FlockManager

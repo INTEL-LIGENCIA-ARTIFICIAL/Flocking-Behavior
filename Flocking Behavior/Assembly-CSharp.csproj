@@ -62,9 +62,6 @@
   <ItemGroup>
     <Compile Include="Assets\scripts\FlockManager.cs" />
     <Compile Include="Assets\scripts\Flock.cs" />
-    <Compile Include="Assets\TestScripts\Flock_T.cs" />
-    <Compile Include="Assets\TestScripts\Leader.cs" />
-    <Compile Include="Assets\TestScripts\FlockManager_T.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

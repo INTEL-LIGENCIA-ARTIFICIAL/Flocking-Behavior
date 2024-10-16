@@ -10,6 +10,8 @@ public class Flock : MonoBehaviour
     // Boolean flag to check if the fish needs to turn (when hitting boundaries)
     bool turning = false;
 
+    public bool isLeader = false; //new is leader o not
+
     // Start is called before the first frame update
     // Initializes the fish with a random speed within the bounds set by FlockManager
     private void Awake()
@@ -53,6 +55,33 @@ public class Flock : MonoBehaviour
         }
         else
         {
+
+            if (!isLeader)//new check if is leader
+            {
+                GameObject closestLeader = null;
+                float closestDistance = float.MaxValue;
+
+                //new Search for the nearest leader
+                foreach (GameObject leader in FlockManager.FM.allLeader)
+                {
+                    float distanceToLeader = Vector3.Distance(this.transform.position, leader.transform.position);
+                    if (distanceToLeader < closestDistance)
+                    {
+                        closestDistance = distanceToLeader;
+                        closestLeader = leader; // new Update the nearest leader
+                    }
+                }
+
+                //new If the nearest leader is found, rotate towards its direction
+                if (closestLeader != null && closestDistance > FlockManager.FM.neighbourDistance)
+                {
+                    Vector3 direction = closestLeader.transform.position - transform.position;
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), FlockManager.FM.rotationSpeed * Time.deltaTime);
+                    
+                }
+            }
+
+
             // Randomly adjust the fish's speed occasionally (10% chance per frame)
             if (Random.Range(0, 100) < 10)
             {
@@ -132,6 +161,12 @@ public class Flock : MonoBehaviour
 
             // Calculate the direction to move based on cohesion and avoidance
             Vector3 direction = (vcentre + vavoid) - this.transform.position;
+
+            //new Increase the separation force.
+            if (vavoid.magnitude > 0)
+            {
+                direction += vavoid.normalized * 2; 
+            }
 
             // If there's a direction to move, smoothly rotate toward it using Slerp
             if (direction != Vector3.zero)
