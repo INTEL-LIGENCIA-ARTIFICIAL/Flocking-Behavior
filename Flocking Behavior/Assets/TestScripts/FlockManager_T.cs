@@ -12,20 +12,22 @@ public class FlockManager_T : MonoBehaviour
     
     // The fish prefab to instantiate for each fish in the flock
     public GameObject fishPrefab; 
+    public GameObject leaderPrefab; 
     
     // Number of fish in the flock
     public int numFish = 20; 
+    public int numLeader = 2; 
     
     // Array to store all instantiated fish
     public GameObject[] allFish; 
+    public GameObject[] allLeader; 
     
     // Defines the 3D space within which the fish can swim
     public Vector3 swimLimits = new Vector3(5, 5, 5); 
     
     // Randomly selected goal position for fish to move towards
     public Vector3 goalPos = Vector3.zero;
-    public GameObject leaderPrefab; 
-    public GameObject leader;
+  
 
     [Header("Fish Settings")] // Organizes the following variables in the Inspector for easier configuration
     
@@ -51,6 +53,7 @@ public class FlockManager_T : MonoBehaviour
     {
         // Initialize the array to hold all the fish
         allFish = new GameObject[numFish];
+        allLeader = new GameObject[numLeader];
 
         // Loop to create and place each fish randomly within the swim limits
         for (int i = 0; i < numFish; i++)
@@ -65,12 +68,19 @@ public class FlockManager_T : MonoBehaviour
             allFish[i] = Instantiate(fishPrefab, pos, Quaternion.identity);
         }
 
-        Vector3 pos1 = this.transform.position + new Vector3(
+
+        for (int i = 0; i < numLeader; i++)
+        {
+            // Calculate a random position within the swim limits
+            Vector3 pos = this.transform.position + new Vector3(
                 Random.Range(-swimLimits.x, swimLimits.x),
                 Random.Range(-swimLimits.y, swimLimits.y),
                 Random.Range(-swimLimits.z, swimLimits.z));
 
-        leader = Instantiate(leaderPrefab, pos1, Quaternion.identity);
+            // Instantiate the fish prefab at the random position with no rotation
+            allLeader[i] = Instantiate(leaderPrefab, pos, Quaternion.identity);
+        }
+
 
         // Set the static reference to this instance of FlockManager
         FM = this;

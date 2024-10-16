@@ -122,78 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &926458667
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 926458670}
-  - component: {fileID: 926458669}
-  - component: {fileID: 926458668}
-  m_Layer: 0
-  m_Name: FishiGrup (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &926458668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926458667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d03de4647315694bb8b54a7604ec66f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  moveSpeed: 3
-  turnSpeed: 5
-  wanderRadius: 5
---- !u!114 &926458669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926458667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc19c97ff09fa7242bc3f770efb4394e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishPrefab: {fileID: 1729642294317769856, guid: 39a0c0520a8948b4db9939a95943d72e, type: 3}
-  numFish: 20
-  allFish: []
-  swimLimits: {x: 10, y: 10, z: 2}
-  goalPos: {x: 0, y: 0, z: 0}
-  leaderPrefab: {fileID: 3712385015633997083, guid: 5c7cd29c401f9d3429ff6ac15af30508, type: 3}
-  leader: {fileID: 0}
-  minSpeed: 0.25
-  maxSpeed: 1.45
-  neighbourDistance: 1.67
-  rotationSpeed: 2.04
---- !u!4 &926458670
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926458667}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3029817, y: 1.0102433, z: -2.0940266}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1281812559
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +224,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2014816919}
   - component: {fileID: 2014816918}
-  - component: {fileID: 2014816920}
   m_Layer: 0
   m_Name: FishiGrup
   m_TagString: Untagged
@@ -317,12 +244,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishPrefab: {fileID: 1729642294317769856, guid: 39a0c0520a8948b4db9939a95943d72e, type: 3}
-  numFish: 20
-  allFish: []
-  swimLimits: {x: 5, y: 5, z: 2}
-  goalPos: {x: 0, y: 0, z: 0}
   leaderPrefab: {fileID: 3712385015633997083, guid: 5c7cd29c401f9d3429ff6ac15af30508, type: 3}
-  leader: {fileID: 0}
+  numFish: 20
+  numLeader: 2
+  allFish: []
+  allLeader: []
+  swimLimits: {x: 5, y: 1, z: 5}
+  goalPos: {x: 0, y: 0, z: 0}
   minSpeed: 0.25
   maxSpeed: 1.45
   neighbourDistance: 1.67
@@ -342,22 +270,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2014816920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2014816916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d03de4647315694bb8b54a7604ec66f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  moveSpeed: 3
-  turnSpeed: 5
-  wanderRadius: 5
 --- !u!1 &2087571025
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,4 +371,3 @@ SceneRoots:
   - {fileID: 1281812562}
   - {fileID: 2087571027}
   - {fileID: 2014816919}
-  - {fileID: 926458670}
