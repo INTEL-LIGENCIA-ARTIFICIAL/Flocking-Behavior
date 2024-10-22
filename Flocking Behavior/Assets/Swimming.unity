@@ -420,7 +420,7 @@ MonoBehaviour:
   goalPos: {x: 0, y: 0, z: 0}
   minSpeed: 0.5
   maxSpeed: 2
-  neighbourDistance: 1.38
+  neighbourDistance: 2.91
   rotationSpeed: 2.18
 --- !u!4 &2080607500
 Transform:
